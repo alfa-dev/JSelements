@@ -1,70 +1,80 @@
-const colors = {
-  "colors": [
-    {
-      "color": "black",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,255,255,1],
-        "hex": "#000"
-      }
-    },
-    {
-      "color": "white",
-      "category": "value",
-      "code": {
-        "rgba": [0,0,0,1],
-        "hex": "#FFF"
-      }
-    },
-    {
-      "color": "red",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,0,0,1],
-        "hex": "#FF0"
-      }
-    },
-    {
-      "color": "blue",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [0,0,255,1],
-        "hex": "#00F"
-      }
-    },
-    {
-      "color": "yellow",
-      "category": "hue",
-      "type": "primary",
-      "code": {
-        "rgba": [255,255,0,1],
-        "hex": "#FF0"
-      }
-    },
-    {
-      "color": "green",
-      "category": "hue",
-      "type": "secondary",
-      "code": {
-        "rgba": [0,255,0,1],
-        "hex": "#0F0"
-      }
-    },
-  ]
+const colors = [
+  {
+    "color": "black",
+    "category": "hue",
+    "type": "primary",
+    "code": {
+      "rgba": [255,255,255,1],
+      "hex": "#000"
+    }
+  },
+  {
+    "color": "white",
+    "category": "value",
+    "code": {
+      "rgba": [0,0,0,1],
+      "hex": "#FFF"
+    }
+  },
+  {
+    "color": "red",
+    "category": "hue",
+    "type": "primary",
+    "code": {
+      "rgba": [255,0,0,1],
+      "hex": "#FF0"
+    }
+  },
+  {
+    "color": "blue",
+    "category": "hue",
+    "type": "primary",
+    "code": {
+      "rgba": [0,0,255,1],
+      "hex": "#00F"
+    }
+  },
+  {
+    "color": "yellow",
+    "category": "hue",
+    "type": "primary",
+    "code": {
+      "rgba": [255,255,0,1],
+      "hex": "#FF0"
+    }
+  },
+  {
+    "color": "green",
+    "category": "hue",
+    "type": "secondary",
+    "code": {
+      "rgba": [0,255,0,1],
+      "hex": "#0F0"
+    }
+  }
+]
+
+let tableLine = (color) => {
+  return tr(
+    td(color.color),
+    td({style: `color: ${color.code.hex}`}, color.code.hex)
+  )
 }
 
 render(
-  header(
-    h1('JS Elements')
-  ),
-  main([
-    h2('Exemplo de lista'),
-    ul(colors['colors'].map(function(c){
-        return li( c, c.color);
-      })
+ section(
+    header(
+      h2('Exemplo de tabela de Cores')
+    ),
+
+    table(
+      thead(
+        tr(
+          th('Name'), th('Hex')
+        )
+      ),
+      colors.map(tableLine)
     )
-  ])
-);
+
+  )
+)

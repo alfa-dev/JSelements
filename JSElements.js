@@ -1,38 +1,57 @@
 import {tags} from './tags.js';
 
-tags.map( function(e){
-  window[e] = function(props, content){
-    var element = document.createElement(e);
+tags.map(function(e) {
+  window[e] = function(...args) {
+    const ELEMENT = document.createElement(e)
 
-    if(!content) {
-      content = props;
-      props = null;
-    }
+    args.map(insertContentAtElement)
+      .filter( child => !!child )
+      .map((child) => {
+        ELEMENT.appendChild(child)
+      })
 
-    if(!content)
-      return element;
+    function insertContentAtElement(content) {
+      if(content === undefined) return
 
-    if(content.constructor === Array){
-      content.map(insertContentAtElement.bind(this, element));
-    } else {
-      insertContentAtElement(element, content);
-    }
+      if(isElement(content))
+        return content
+      else if(content.constructor === String)
+        return document.createTextNode(content)
+      else if(content.constructor === Array) {
+        let container = document.createDocumentFragment()
 
-    if(!!props) {
-      for (var prop in props) {
-        element.setAttribute(prop, props[prop]);
+        content.map(insertContentAtElement)
+          .map((element) => {
+            container.appendChild(element)
+          })
+
+        return container
+      }
+      else if(content.constructor === Object) {
+        for (var prop in content) {
+          ELEMENT.setAttribute(prop, content[prop]);
+        }
+
+        return;
       }
     }
 
-    function insertContentAtElement(element, content) {
-      if(content.constructor === String) {
-        element.innerText = content;
-      } else {
-        element.appendChild(content);
+    function isElement(obj) {
+      try {
+        //Using W3 DOM2 (works for FF, Opera and Chrome)
+        return obj instanceof HTMLElement;
+      }
+      catch(e){
+        //Browsers not supporting W3 DOM2 don't have HTMLElement and
+        //an exception is thrown and we end up here. Testing some
+        //properties that all elements have (works on IE7)
+        return (typeof obj==="object") &&
+          (obj.nodeType===1) && (typeof obj.style === "object") &&
+          (typeof obj.ownerDocument ==="object");
       }
     }
 
-    return element;
+    return ELEMENT;
   };
 });
 
