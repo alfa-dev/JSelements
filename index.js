@@ -75,6 +75,5 @@ render(
       ),
       colors.map(tableLine)
     )
-
   )
 )
