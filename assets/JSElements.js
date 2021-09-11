@@ -51,14 +51,8 @@ tags.map(function(e) {
   };
 });
 
-window['render'] = function(...content) {
+export const render = (target = document.body, ...content) => {
   content.map(function(e) {
-    document.body.appendChild(e);
-  });
-}
-
-window['head'] = function(...content) {
-  content.map(function(e) {
-    document.head.appendChild(e);
+    target.appendChild(e);
   });
 }
