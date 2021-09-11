@@ -7,9 +7,7 @@ body {
   font-size: 14px;
 }
 
-code {
-  border-radius: .5em;
-}
+code { border-radius: .5em; }
 
 article {
   margin: .5em auto;
@@ -31,24 +29,26 @@ article {
   padding-bottom: 10em;
 }
 
-#main h1, #main p {
-  margin: 0px;
-  font-size: 4em;
-  font-weight: normal;
-  text-shadow: 2px 2px 3px rgba(0,0,0, .4);
-}
+#main {
+  h1, p {
+    margin: 0px;
+    font-size: 4em;
+    font-weight: normal;
+    text-shadow: 2px 2px 3px rgba(0,0,0, .4);
+  }
 
-#main p {
-  font-size: 1.5em;
-}
+  p {
+    font-size: 1.5em;
 
-#main p:last-of-type {
-  font-size: 1em;
-  margin-top: .3em;
-}
+    &:last-of-type {
+      font-size: 1em;
+      margin-top: .3em;
+    }
+  }
 
-#main h1 strong {
-  margin-left: .2em;
+  h1 strong {
+    margin-left: .2em;
+  }
 }
 
 .shadow {
