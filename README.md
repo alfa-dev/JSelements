@@ -1,5 +1,3 @@
-markdown
-Copiar código
 # 🌟 JS Elements 🌟
 
 Welcome to **JS Elements**, the featherweight 2KB JavaScript framework that lets you create, manage, and render HTML elements with elegance and ease. Say goodbye to cumbersome code and hello to simplicity!
